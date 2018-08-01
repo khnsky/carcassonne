@@ -41,7 +41,7 @@ size_t board_get_size(const char* filename) {
         // increase rows on newline
         if (ch == '\n') {
             ++row;
-            col_max = col > col_max ? col : col_max;
+            col_max = MAX(col, col_max);
             col = 0;
             if (count) {
                 fclose(file);
@@ -57,7 +57,7 @@ size_t board_get_size(const char* filename) {
         }
     }
     fclose(file);
-    return row > col_max ? row : col_max;
+    return MAX(row, col_max);
 }
 
 board_t board_alloc(size_t size) {
