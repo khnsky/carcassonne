@@ -28,21 +28,13 @@ void side_free(side** selfPtr) {
     *selfPtr = NULL;
 }
 
-element side_getType(side* self) {
-    return self->type;
-}
+element side_getType(const side* self) { return self->type; }
 
-void side_setType(side* self, element type) {
-    self->type = type;
-}
+void side_setType(side* self, element type) { self->type = type; }
 
-int side_isCompleted(side* self) {
-    return self->completion;
-}
+int side_isCompleted(const side* self) { return self->completion; }
 
-void side_setCompletionStatus(side* self, int compl) {
-    self->completion = compl;
-}
+void side_setCompletionStatus(side* self, int compl) { self->completion = compl; }
 
 direction direction_getOpposite(direction dir) {
     switch (dir) {

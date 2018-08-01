@@ -5,13 +5,9 @@
 #include <string.h>
 
 bool tlist_parse(const char* filename, sized_tlist* list) {
-    if (!list || !list->tiles) {
-        return false;
-    }
-    FILE* file;
-    if ((file = fopen(filename, "r")) == 0) {
-        return false;
-    }
+    if (!list || !list->tiles) { return false; }
+    FILE* file = fopen(filename, "r");
+    if (file == NULL) { return false; }
     for (size_t i = 0; i < list->size; ++i) {
         // if any tile parsing fails return false
         if (!tile_parse(file, &list->tiles[i])) {
@@ -30,9 +26,7 @@ size_t tlist_get_len(const char* filename) {
         int ch;
         while ((ch = getc(list)) != EOF) {
             while ((ch = getc(list)) != EOF && isspace(ch)) { ; }
-            if (ch != EOF && !isspace(ch)) {
-                ++count;
-            }
+            if (ch != EOF && !isspace(ch)) { count++; }
             while ((ch = getc(list)) != EOF && !isspace(ch)) { ; }
         }
         fclose(list);
@@ -68,42 +62,34 @@ void tlist_free(sized_tlist* list) {
 
 
 void tlist_print(const sized_tlist* list) {
-    int counter = 1;            // separate counter for display
+    int counter = 1;                                    // separate counter for display
     for (size_t i = 0; i < list->size; ++i) {
-        if (list->tiles[i]) {   // if tile nonempty
+        if (list->tiles[i]) {                           // if tile nonempty
             printf("%-3d: ", counter);
             tile_print(list->tiles[i]);
             putchar('\n');
-            ++counter;
+            counter++;
         }
     }
 }
 
 bool tlist_write(const sized_tlist* list, const char* filename) {
-    FILE* file;
-    if ((file = fopen(filename, "w")) == 0) {
-        return false;
-    }
+    FILE* file = fopen(filename, "w");
+    if (file == NULL) { return false; }
     char str[5];
     for (size_t i = 0; i < list->size; ++i) {
-        fprintf(file,
-                "%.*s\n", 5,
-                tile_to_str(list->tiles[i], str));
+        fprintf(file, "%.*s\n", 5, tile_to_str(list->tiles[i], str));
     }
     fclose(file);
     return true;
 }
 
-tile* tlist_eraseAt(sized_tlist* list,int index) {
-    if(index < 0 || index >= list->size) {
-        return NULL;
-    }
-
+tile* tlist_eraseAt(sized_tlist* list, size_t index) {
+    if(index >= list->size) { return NULL; }
     tile* t = list->tiles[index];
-    (list->size)--;
-
-    for(int i = index; i < list->size; i++) {
-        list->tiles[i] = list->tiles[i+1];
+    for(size_t i = index; i < list->size - 1; ++i) {
+        list->tiles[i] = list->tiles[i + 1];
     }
+    list->size--;
     return t;
 }

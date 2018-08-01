@@ -33,9 +33,7 @@ void init_tlist_interactive(sized_tlist* list) {
         fputs("enter name of a file containing tile list: ", stdout);
         fgets(name, sizeof(name), stdin);
         name[strcspn(name, "\n")] = '\0';
-        if (tlist_init(name, list)) {
-            return;
-        }
+        if (tlist_init(name, list)) { return; }
         fputs("initializing failed, try again.\n", stderr);
     }
 }
@@ -57,9 +55,7 @@ void load_board_interactive(sized_board* board) {
         fgets(name, sizeof(name), stdin);
         name[strcspn(name, "\n")] = '\0';
         // mode auto to load board from file
-        if (board_init(AUTO, name, board)) {
-            return;
-        }
+        if (board_init(AUTO, name, board)) { return; }
         fputs("initializing failed, try again.\n", stderr);
     }
 }
@@ -80,9 +76,7 @@ tile* choose_tile_interactive(sized_tlist* list, tile** t) {
         scanf("%lu", &choice);
         // exhaust stdin
         for (int ch; (ch = getchar()) != EOF && ch != '\n' && ch != '\r';) { ; }
-        if (choice == 0 || choice <= list->size) {
-            break;
-        }
+        if (choice == 0 || choice <= list->size) { break; }
         puts("choice out of bounds");
     }
     // choose right tile based on user input (numbering from 1 and ignore null pointers)
@@ -122,9 +116,7 @@ void rotate_tile_interactive(tile** t) {
 }
 
 void place_tile_interactive(sized_board* board, sized_tlist* list, tile** t) {
-    if (*t == 0) {
-        choose_tile_interactive(list, t);
-    }
+    if (*t == NULL) { choose_tile_interactive(list, t); }
     unsigned long h, w;
     while (true) {
         fputs("where to place tile (h w): ", stdout);
@@ -328,9 +320,7 @@ state_cmd run_prompt(state* s) {
     input[strcspn(input, "\n")] = '\0';
 
     for (size_t i = 0; i < ARR_LEN(act_list); ++i) {
-        if (STR_EQ(input, act_list[i].cmd)) {
-            return act_list[i].func(s);
-        }
+        if (STR_EQ(input, act_list[i].cmd)) { return act_list[i].func(s); }
     }
     fprintf(stderr, "unknown command\n");
     return CMD_UNKNOWN;
@@ -339,14 +329,10 @@ state_cmd run_prompt(state* s) {
 void run_interactive(gamemode mode, const char* list_filename) {
     greeting();
     sized_tlist list;
-    if (!tlist_init(list_filename, &list)) {
-        init_tlist_interactive(&list);
-    }
+    if (!tlist_init(list_filename, &list)) { init_tlist_interactive(&list); }
 
     sized_board board;
-    if (!board_init(mode, 0, &board)) {
-        load_board_interactive(&board);
-    }
+    if (!board_init(mode, 0, &board)) { load_board_interactive(&board); }
 
     tile* c_tile = 0;
 

@@ -70,6 +70,6 @@ bool tlist_write(const sized_tlist*, const char*);
  * @param [in] index of the tile to be erased form the list
  * @return the pointer to the erased tile
  */
-tile* tlist_eraseAt(sized_tlist*,int);
+tile* tlist_eraseAt(sized_tlist*, size_t);
 
 #endif

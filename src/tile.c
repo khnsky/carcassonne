@@ -34,9 +34,7 @@ tile* tile_from_str(const char str[static 5], tile* t) {
         t->left = side_new(elem_from_char(str[3]));
         t->mod = mod_from_char(str[4]);
 
-        if(tile_numOfSegments(t,ROAD)>2) {
-            t->mod = CROSSROASDS;
-        }
+        if(tile_numOfSegments(t, ROAD) > 2) { t->mod = CROSSROASDS; }
     }
     return t;
 }
@@ -56,15 +54,15 @@ tile* tile_alloc_from_tile(const tile* orig) {
         new->mod = orig->mod;
         return new;
     }
-    return 0;
+    return NULL;
 }
 
 void tile_free(tile* t) {
     if (t) {
-        side_free(&(t->up));
-        side_free(&(t->right));
-        side_free(&(t->down));
-        side_free(&(t->left));
+        side_free(&t->up);
+        side_free(&t->right);
+        side_free(&t->down);
+        side_free(&t->left);
     }
 }
 
@@ -74,12 +72,8 @@ bool tile_parse(FILE* file, tile** t) {
     char str[5];
     size_t i = 0;
     while ((ch = getc(file)) != EOF) {
-        if (ch == '\t') {
-            return true;
-        }
-        if (isspace(ch)) {
-            continue;
-        }
+        if (ch == '\t') { return true; }
+        if (isspace(ch)) { continue; }
         str[i++] = (char)ch;
         if (i == 5) {
             tile_alloc_from_str(str, t);
@@ -160,15 +154,12 @@ void rotation_print(rotation_t rot) {
 }
 
 tile* tile_rotate_amount(rotation_t rot, tile* t) {
-    while(rot--) {
-        tile_rotate(t);
-    }
+    assert(rot <= ROT_NO && rot >= ROT_270 && "invalid rotation");
+    while(rot--) { tile_rotate(t); }
     return t;
 }
 
-bool tile_isEmpty(const tile* t) {
-    return t == 0;
-}
+bool tile_isEmpty(const tile* t) { return t == 0; }
 
 element tile_getSideElement(const tile* t, direction dir) {
     switch (dir) {
@@ -216,46 +207,24 @@ int tile_getSideCompletion(const tile* t, direction dir) {
     return 0;
 }
 
-modifier tile_getCenter(const tile* t) {
-    return t->mod;
-}
+modifier tile_getCenter(const tile* t) { return t->mod; }
 
 size_t tile_numOfSegments(const tile* t, element type) {
     size_t count = 0;
-
-    if (side_getType(t->up) == type) {
-        count++;
-    }
-    if (side_getType(t->right) == type) {
-        count++;
-    }
-    if (side_getType(t->down) == type) {
-        count++;
-    }
-    if (side_getType(t->left) == type) {
-        count++;
-    }
-
+    if (side_getType(t->up) == type) { count++; }
+    if (side_getType(t->right) == type) { count++; }
+    if (side_getType(t->down) == type) { count++; }
+    if (side_getType(t->left) == type) { count++; }
     return count;
 }
 
 direction* tile_getSegments(const tile* t, element type, size_t count) {
     direction* segments = malloc(count * sizeof(direction));
-    int i = 0;
-
-    if (side_getType(t->up) == type) {
-        segments[i++] = NORTH;
-    }
-    if (side_getType(t->right) == type) {
-        segments[i++] = EAST;
-    }
-    if (side_getType(t->down) == type) {
-        segments[i++] = SOUTH;
-    }
-    if (side_getType(t->left) == type) {
-        segments[i++] = WEST;
-    }
-
+    size_t i = 0;
+    if (side_getType(t->up) == type) { segments[i++] = NORTH; }
+    if (side_getType(t->right) == type) { segments[i++] = EAST; }
+    if (side_getType(t->down) == type) { segments[i++] = SOUTH; }
+    if (side_getType(t->left) == type) { segments[i++] = WEST; }
     return segments;
 }
 
@@ -278,20 +247,15 @@ bool tile_hasRoad(const tile* t) {
         || side_getType(t->left) == ROAD;
 }
 
-bool tile_hasTemple(const tile* t) {
-    return tile_getCenter(t) == TEMPLE;
-}
+bool tile_hasTemple(const tile* t) { return tile_getCenter(t) == TEMPLE; }
 
-bool tile_hasCrossroads(const tile* t) {
-    return tile_getCenter(t) == CROSSROASDS;
-}
+bool tile_hasCrossroads(const tile* t) { return tile_getCenter(t) == CROSSROASDS; }
 
-bool tile_hasShield(const tile* t) {
-    return t->mod == SHIELD;
-}
+bool tile_hasShield(const tile* t) { return t->mod == SHIELD; }
 
 bool tile_isSymmetric(const tile* t) {
-    return t->up->type == t->down->type && t->left->type ==t->right->type;
+    return t->up->type == t->down->type
+        && t->left->type ==t->right->type;
 }
 
 bool tile_isUniform(const tile* t) {

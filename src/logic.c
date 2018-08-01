@@ -11,9 +11,7 @@
 #include <string.h>
 
 void handle_args(int argc, char* argv[]) {
-    if (argc < 1) {
-        return;
-    }
+    if (argc < 1) { return; }
 
     const struct { const char* arg; void (*func)(); } arg_list[] = {
         { "usage",      usage },
@@ -34,8 +32,8 @@ void handle_args(int argc, char* argv[]) {
 }
 
 FILE* exit_on_bad_file_open(const char* filename, const char* mode, const char* name) {
-    FILE* file;
-    if ((file = fopen(filename, mode)) == 0) {
+    FILE* file = fopen(filename, mode);
+    if (file == NULL) {
         fprintf(stderr, "error opening %s\n", name);
         exit(EXIT_FAILURE);
     }
@@ -53,7 +51,7 @@ void run_auto(const char* list_filename, const char* board_filename) {
     
     // make a move found by an algorithm
     ai_makeMove(&board,&list,ai_bruteForce(&board,&list));
-    printf("\nScore: %i\n",score(&board));
+    printf("\nScore: %i\n", score(&board));
     
     // write updated objects to files
     tlist_write(&list,list_filename);
@@ -70,29 +68,24 @@ void run(int argc, char* argv[]) {
     // if one set mode to INTERACTIVE,
     // else set to AUTO
     gamemode mode = argc - 1;
-    char* list_file = 0, *board_file = 0;
+    char* list_file = 0,
+        * board_file = 0;
 
     if (mode == INTERACTIVE || mode == AUTO) {
         list_file = argv[1];
-        // check if can open list file in rw mode
         check_valid_file(list_file, "r+", "tile-list file");
     }
 
     if (mode == AUTO) {
         board_file = argv[2];
-        // check if can open list file in rw mode
-        FILE* temp;
-        if ((temp = fopen(board_file, "r+")) == NULL) {
+        FILE* temp = fopen(board_file, "r+");
+        if (temp == NULL) {
             printf("file `%s` doesn't exits, creating one\n", board_file);
             check_valid_file(board_file, "w+", "board file");
         } else { fclose(temp); }
     }
-    if (mode == INTERACTIVE_NO_TILES) {
-        list_file = "default_tiles";
-    }
+    if (mode == INTERACTIVE_NO_TILES) { list_file = "default_tiles"; }
     if (mode == INTERACTIVE || mode == INTERACTIVE_NO_TILES) {
         run_interactive(mode, list_file);
-    } else {
-        run_auto(list_file, board_file);
-    }
+    } else { run_auto(list_file, board_file); }
 }

@@ -28,20 +28,11 @@ void point_free(point** selfPtr) {
     *selfPtr = NULL;
 }
 
-int point_getRow(point* self) {
-    return self->x;
-}
+int point_getRow(point* self) { return self->x; }
 
-int point_getColumn(point* self) {
-    return self->y;
-}
+int point_getColumn(point* self) { return self->y; }
 
-direction point_getSide(point* self) {
-    return self->side;
-}
-
-
-/* listnode.c*/
+direction point_getSide(point* self) { return self->side; }
 
 struct ListNode {
     point* p;
@@ -61,31 +52,20 @@ void ListNode_free(ListNode** selfPtr) {
     *selfPtr = NULL;
 }
 
-void ListNode_setNext(ListNode* node, ListNode* newNode) {
-    node->next = newNode;
-}
+void ListNode_setNext(ListNode* node, ListNode* newNode) { node->next = newNode; }
 
-ListNode* ListNode_getNext(ListNode* node) {
-    return node->next;
-}
+ListNode* ListNode_getNext(const ListNode* node) { return node->next; }
 
-point* ListNode_getPoint(ListNode* node) {
-    return node->p;
-}
+point* ListNode_getPoint(const ListNode* node) { return node->p; }
 
-void ListNode_setPoint(ListNode* node, point* p) {
-    node->p = p;
-}
-
-
-/*pointlist.c*/
+void ListNode_setPoint(ListNode* node, point* p) { node->p = p; }
 
 struct List {
     int size;
     ListNode* items;
 };
 
-List* List_new(void) {
+List* List_new() {
     List* self = malloc(sizeof(struct List));
     self->size = 0;
     self->items = NULL;
@@ -168,9 +148,7 @@ void List_removeAt(List* self, int position) {
     self->size = List_count(self);
 }
 
-void List_removeLast(List* self) {
-    List_removeAt(self, self->size - 1);
-}
+void List_removeLast(List* self) { List_removeAt(self, self->size - 1); }
 
 ListNode* List_getNodeAt(List* self, int position) {
     if (position < 0 || position > self->size) throw("Out of bounds");
@@ -185,12 +163,10 @@ ListNode* List_getNodeAt(List* self, int position) {
 }
 
 point* List_getPoint(List* self, int position) {
-    return ListNode_getPoint(List_getNodeAt(self,position));
+    return ListNode_getPoint(List_getNodeAt(self, position));
 }
 
-int List_getSize(List* self) {
-    return (int)self->size;
-}
+int List_getSize(List* self) { return (int)self->size; }
 
 int List_count(List* self) {
     int count = 0;
@@ -206,7 +182,9 @@ bool List_hasPoint(List* self, int i, int j, direction side) {
     ListNode* cur = self->items;
     while (cur != NULL) {
         point* p = ListNode_getPoint(cur);
-        if (point_getRow(p) == i && point_getColumn(p) == j && point_getSide(p) == side) return true;
+        if (point_getRow(p) == i    &&
+            point_getColumn(p) == j &&
+            point_getSide(p) == side) { return true; }
         cur = ListNode_getNext(cur);
     }
     return false;

@@ -28,9 +28,9 @@ void ListNode_free(ListNode** selfPtr);
 
 void ListNode_setNext(ListNode* node, ListNode* newNode);
 
-ListNode* ListNode_getNext(ListNode* node);
+ListNode* ListNode_getNext(const ListNode* node);
 
-point* ListNode_getPoint(ListNode* node);
+point* ListNode_getPoint(const ListNode* node);
 
 void ListNode_setPoint(ListNode* node, point* p);
 
