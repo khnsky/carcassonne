@@ -191,7 +191,7 @@ bool board_parse(const char* filename, sized_board* board) {
         str[count++] = (char)ch;
         if (count == 5) {
             count = 0;
-            tile_alloc_from_str(str, &(board->tiles)[i][j]);
+            tile_alloc_from_str_asgn(str, &board->tiles[i][j]);
             ++j;
         }
     }

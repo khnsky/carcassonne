@@ -5,9 +5,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-tile* tile_alloc(tile** ptr) {
-    return *ptr = calloc(1, sizeof(tile));
-}
+tile* tile_alloc(void) { return calloc(1, sizeof(tile)); }
+
+tile* tile_alloc_asgn(tile** ptr) { return *ptr = tile_alloc(); }
 
 element elem_from_char(char ch) {
     assert(ch == 'c' || ch == 'r' || ch == 'f');
@@ -39,14 +39,19 @@ tile* tile_from_str(const char str[static 5], tile* t) {
     return t;
 }
 
-tile* tile_alloc_from_str(const char str[static 5], tile** ptr) {
-    return tile_from_str(str, tile_alloc(ptr));
+tile* tile_alloc_from_str(const char str[static 5]) {
+    tile* t;
+    return tile_alloc_from_str_asgn(str, &t);
+}
+
+tile* tile_alloc_from_str_asgn(const char str[static 5], tile** ptr) {
+    return tile_from_str(str, tile_alloc_asgn(ptr));
 }
 
 tile* tile_alloc_from_tile(const tile* orig) {
     if (orig) {
         tile* new;
-        tile_alloc(&new);
+        tile_alloc_asgn(&new);
         new->up = side_copy(orig->up);
         new->right = side_copy(orig->right);
         new->down = side_copy(orig->down);
@@ -76,7 +81,7 @@ bool tile_parse(FILE* file, tile** t) {
         if (isspace(ch)) { continue; }
         str[i++] = (char)ch;
         if (i == 5) {
-            tile_alloc_from_str(str, t);
+            tile_alloc_from_str_asgn(str, t);
             return true;
         }
     }

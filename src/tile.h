@@ -23,12 +23,18 @@ typedef struct {
 /** @} */
 
 /**
+ * alloc tile.
+ * @return pointer to allocated memory for tile
+ */
+tile* tile_alloc(void);
+
+/**
 * set tile pointer to valid memory.
 * remember to free this
 * @param [out] ptr pointer to tile pointer
 * @return valid tile pointer
 */
-tile* tile_alloc(tile**);
+tile* tile_alloc_asgn(tile**);
 
 /**
  * convert character to element.
@@ -58,10 +64,18 @@ tile* tile_from_str(const char[static 5], tile*);
 * set tile pointer to valid memory and initialize according to string.
 * remember to free this
 * @param [in] string 5 cell long string specifying tile
+* @return pointer to initialized tile
+*/
+tile* tile_alloc_from_str(const char[static 5]);
+
+/**
+* set tile pointer to valid memory and initialize according to string.
+* remember to free this
+* @param [in] string 5 cell long string specifying tile
 * @param [out] ptr pointer to tile pointer
 * @return pointer to initialized tile
 */
-tile* tile_alloc_from_str(const char[static 5], tile**);
+tile* tile_alloc_from_str_asgn(const char[static 5], tile**);
 
 /**
  * allocate copy of supplied tile.
