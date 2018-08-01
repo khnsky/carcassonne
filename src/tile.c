@@ -154,7 +154,7 @@ void rotation_print(rotation_t rot) {
 }
 
 tile* tile_rotate_amount(rotation_t rot, tile* t) {
-    assert(rot <= ROT_NO && rot >= ROT_270 && "invalid rotation");
+    assert(rot >= ROT_NO && rot <= ROT_270 && "invalid rotation");
     while(rot--) { tile_rotate(t); }
     return t;
 }
