@@ -16,7 +16,7 @@ side* side_newDefault(void) {
     return self;
 }
 
-side* side_copy(side* self) {
+side* side_copy(const side* self) {
     side* copy = side_newDefault();
     copy->type = self->type;
     copy->completion = self->completion;

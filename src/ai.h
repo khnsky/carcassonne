@@ -14,7 +14,7 @@
 * @param [in] list with available tiles
 * @return best move
 */
-move* ai_bruteForce(sized_board* board, sized_tlist* list);
+move* ai_bruteForce(sized_board*, const sized_tlist*);
 
 /**
 * Makes the move: takes a tile from the lsit and places it on the board
@@ -22,14 +22,14 @@ move* ai_bruteForce(sized_board* board, sized_tlist* list);
 * @param [in] list with available tiles
 * @param [in] the move to be done
 */
-void ai_makeMove(sized_board* board, sized_tlist* list, move* m);
+void ai_makeMove(sized_board*, sized_tlist*, move*);
 
 /**
 * Determines all board's cells available for moves 
 * @param [in] game board
 * @return list of cells available for moves
 */
-List* getAllPossibleMoves(sized_board* board);
+List* getAllPossibleMoves(const sized_board*);
 
 /**
 * Determines all board's cells available for the tile to be placed
@@ -37,13 +37,13 @@ List* getAllPossibleMoves(sized_board* board);
 * @param [in] tile to be placed
 * @return list of cells available for moves
 */
-List* getMovesForTile(sized_board* board, tile* t);
+List* getMovesForTile(const sized_board*, const tile*);
 
 /**
 * Determines the number of free cells
 * @param [in] game sized_board
 * @return number of free cells
 */
-int getEmptyCells(sized_board* board);
+int getEmptyCells(const sized_board*);
 
 #endif

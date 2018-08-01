@@ -72,7 +72,7 @@ move* ai_bruteForce(sized_board* board, const sized_tlist* list) {
     return bestMove;
 }
 
-List* getAllPossibleMoves(sized_board* board) {
+List* getAllPossibleMoves(const sized_board* board) {
    List* list = List_new();
 
    // if board is empty - place tile in the middle of the board
@@ -90,7 +90,7 @@ List* getAllPossibleMoves(sized_board* board) {
    return list;
 }
 
-List* getMovesForTile(sized_board* board, tile* t) {
+List* getMovesForTile(const sized_board* board, const tile* t) {
     List* list = List_new();
     for(size_t i = 0; i < board->size; i++) {
         for(size_t j = 0; j < board->size; j++) {
@@ -102,7 +102,7 @@ List* getMovesForTile(sized_board* board, tile* t) {
     return list;
 }
 
-int getEmptyCells(sized_board* board) {
+int getEmptyCells(const sized_board* board) {
     int num = 0;
     for(size_t i = 0; i < board->size; i++) {
         for(size_t j = 0; j < board->size; j++) {

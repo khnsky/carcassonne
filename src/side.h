@@ -36,7 +36,7 @@ side* side_newDefault(void);
 * @param [in] Side object to bb copied
 * @return a pointer to an new copy of Side
 */
-side* side_copy(side* self);
+side* side_copy(const side* self);
 
 /**
 * frees memory occupied by a Sdie object
@@ -49,7 +49,7 @@ void side_free(side** selfPtr);
 * @param [in] Side object to be checked
 * @return type of a Side object
 */
-element side_getType(side* self);
+element side_getType(const side* self);
 
 /**
 * sets the type of a Side 
@@ -63,7 +63,7 @@ void side_setType(side* self, element type);
 * @param [in] Side object to be checeked
 * @return status of Side's completion
 */
-int side_isCompleted(side* self);
+int side_isCompleted(const side* self);
 
 /**
 * set the status of Side's completion: 1 - YES, 0 - NOT SET, -1 - NO
