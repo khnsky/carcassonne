@@ -5,10 +5,6 @@
 #include <string.h>
 #include <assert.h>
 
-#define throw(MSG) assert(0 && MSG);
-
-/*point.c*/
-
 struct point {
     int x;
     int y;
@@ -73,7 +69,8 @@ List* List_new() {
 }
 
 void List_free(List** selfPtr) {
-    if (selfPtr == NULL || *selfPtr == NULL) throw("Null pointer on free()");
+    // TODO: null pointer on free?
+    assert(selfPtr && *selfPtr && "null pointer on free");
     ListNode* cur = (*selfPtr)->items;
     ListNode* temp = NULL;
     while (cur != NULL) {
@@ -92,9 +89,9 @@ void List_addFirst(List* self, point* p) {
     self->size = List_count(self);
 }
 void List_insertAt(List* self, point* p, int position) {
-    if (p == NULL) throw("Null reference");
-	if (position < 0) throw("Out of bounds");
-    if (position >= self->size) position = self->size;
+    assert(p && "null reference");
+    assert(position >= 0 && "out of bounds");
+    if (position >= self->size) { position = self->size; }
 
     if (position == 0) {
         List_addFirst(self, p);
@@ -113,21 +110,20 @@ void List_insertAt(List* self, point* p, int position) {
 }
 
 void List_addLast(List* self, point* p) {
-    if (p == NULL) throw("Null reference");
-    if(p != NULL)
+    assert(p && "null reference");
     List_insertAt(self, p, self->size++);
 }
 
 void List_removeFirst(List* self) {
     ListNode* node = self->items;
-    if (node == NULL) throw("Null reference");
+    assert(node && "null reference");
     self->items = ListNode_getNext(node);
     ListNode_free(&node);
     self->size = List_count(self);
 }
 
 void List_removeAt(List* self, int position) {
-    if (position < 0 || position >= self->size) throw("Out of bounds");
+    assert(position >= 0 && position < self->size && "out of bounds");
 
     if (position == 0) {
         List_removeFirst(self);
@@ -147,7 +143,7 @@ void List_removeAt(List* self, int position) {
 void List_removeLast(List* self) { List_removeAt(self, self->size - 1); }
 
 ListNode* List_getNodeAt(List* self, int position) {
-    if (position < 0 || position > self->size) throw("Out of bounds");
+    assert(position >= 0 && position <= self->size && "out of bounds");
     ListNode* cur = self->items;
     for (int i = 0; cur != NULL && i != position; ++i) {
         cur = ListNode_getNext(cur);

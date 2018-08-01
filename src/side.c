@@ -44,7 +44,7 @@ direction direction_getOpposite(direction dir) {
     case SOUTH: return NORTH;
     case WEST: return EAST;
     }
-    return -1;
+    assert(dir >= NORTH && dir <= WEST && "invalid direction");
 }
 
 bool direction_areOpposite(direction dir1, direction dir2) {

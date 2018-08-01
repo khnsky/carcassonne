@@ -168,7 +168,7 @@ element tile_getSideElement(const tile* t, direction dir) {
     case SOUTH: return side_getType(t->down);
     case WEST: return side_getType(t->left);
     }
-    return 0;
+    assert(dir <= NORTH && dir >= WEST && "invalid rotation");
 }
 
 side* tile_getSide(const tile* t, direction dir) {
