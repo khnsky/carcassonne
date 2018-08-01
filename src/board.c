@@ -23,8 +23,7 @@ size_t board_get_size_interactive() {
 }
 
 size_t board_get_size(const char* filename) {
-    FILE* file = fopen(filename, "r");
-    if (file == NULL) { return false; }
+    TRY_OPEN(file, filename, "r");
     int ch;
     size_t row = 0, col = 0, col_max = 0;
     size_t count = 0;
@@ -154,8 +153,7 @@ rotation_t tile_can_place_rotated(const sized_board* board,
 void tile_place(tile** place, tile* t) { *place = t; }
 
 bool board_parse(const char* filename, sized_board* board) {
-    FILE* file = fopen(filename, "r");
-    if (file == NULL) { return false; }
+    TRY_OPEN(file, filename, "r");
     int ch;
     char str[5];
     // i: rows, j: columns, count: current tile letter counter
@@ -243,8 +241,7 @@ void board_print_legal_moves(const sized_board* board, tile* t) {
 }
 
 bool board_write(const sized_board* board, const char* filename) {
-    FILE* file = fopen(filename, "w");
-    if (file == NULL) { return false; }
+    TRY_OPEN(file, filename, "w");
     char str[5];
     for (size_t i = 0; i < board->size; ++i) {
         for (size_t j = 0; j < board->size; ++j) {

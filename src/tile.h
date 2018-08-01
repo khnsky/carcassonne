@@ -8,6 +8,10 @@
 #include <stddef.h>
 #include <stdio.h>
 
+#define TRY_OPEN(file, name, mode)  \
+    FILE* file = fopen(name, mode); \
+    if (!file) { return 0; }
+
 /** @addtogroup Tile
 * enumerators and struct used to represent a tile
 * @{
