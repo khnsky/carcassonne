@@ -43,7 +43,6 @@ bool tlist_init(const char*, sized_tlist*);
  */
 sized_tlist tlist_init_exit_on_err(const char*);
 
-// TODO: not done
 /**
 * print tile array, tiles are separated by newlines.
 * @param [in] t tile array
