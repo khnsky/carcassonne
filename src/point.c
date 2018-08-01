@@ -104,10 +104,8 @@ void List_insertAt(List* self, point* p, int position) {
     ListNode* node = ListNode_new(p);
 
     ListNode* cur = self->items;
-    int i = 0;
-    while (cur != NULL && i != position - 1) {
+    for (int i = 0; cur != NULL && i != position - 1; ++i) {
         cur = ListNode_getNext(cur);
-        i++;
     }
     ListNode_setNext(node, ListNode_getNext(cur));
     ListNode_setNext(cur, node);
@@ -137,9 +135,7 @@ void List_removeAt(List* self, int position) {
     }
 
     ListNode* cur = self->items;
-    int i = 0;
-    while (cur != NULL && i != position - 1) {
-        i++;
+    for (int i = 0; cur != NULL && i != position - 1; ++i) {
         cur = ListNode_getNext(cur);
     }
     ListNode* node = ListNode_getNext(cur);
@@ -153,10 +149,7 @@ void List_removeLast(List* self) { List_removeAt(self, self->size - 1); }
 ListNode* List_getNodeAt(List* self, int position) {
     if (position < 0 || position > self->size) throw("Out of bounds");
     ListNode* cur = self->items;
-    int i = 0;
-
-    while (cur != NULL && i != position) {
-        i++;
+    for (int i = 0; cur != NULL && i != position; ++i) {
         cur = ListNode_getNext(cur);
     }
     return cur;
