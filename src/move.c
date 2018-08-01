@@ -18,7 +18,7 @@ move* move_new(int row, int col, int index, int rotation) {
     return self;
 }
 
-move* move_default(void) {
+move* move_default() {
     move* self = malloc(sizeof(move)); 
     self->row = self->column = self->tileIndex = self->rotation = -1;
     return self;

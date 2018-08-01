@@ -6,7 +6,7 @@
 
 typedef struct move move;
 
-move* move_default();
+move* move_default(void);
 move* move_new(int, int, int, int);
 move* move_newFromScore(int);
 void move_free(move**);

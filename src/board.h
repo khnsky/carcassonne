@@ -19,7 +19,7 @@ typedef struct {
  * get size of the game board interactily.
  * @return size of the board
  */
-size_t board_get_size_interactive();
+size_t board_get_size_interactive(void);
 
 /**
  * get size of the game board traversing trough file.

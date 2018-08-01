@@ -10,7 +10,7 @@ side* side_new(element type) {
     return self;
 }
 
-side* side_newDefault(void) {
+side* side_newDefault() {
     side* self = malloc(sizeof(side));
     self->type = -1;
     self->completion = 0;

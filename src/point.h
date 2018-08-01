@@ -37,7 +37,7 @@ void ListNode_setPoint(ListNode* node, point* p);
 
 typedef struct List List;
 
-List* List_new();
+List* List_new(void);
 
 void List_free(List** selfPtr);
 
