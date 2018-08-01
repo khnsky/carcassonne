@@ -7,6 +7,8 @@
 #include <stdbool.h>
 #include <string.h>
 
+/** @file point.h */
+
 typedef struct point point;
 
 point* point_new(int i, int j, direction side);
