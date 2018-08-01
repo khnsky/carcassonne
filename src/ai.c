@@ -1,7 +1,8 @@
 #include "ai.h"
-#include <time.h>
+
 #include <limits.h>
 #include <math.h>
+#include <time.h>
 
 #define ROTATION_MOVES 4
 

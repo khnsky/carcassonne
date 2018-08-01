@@ -1,5 +1,6 @@
 #include "side.h"
 
+#include <assert.h>
 #include <stdlib.h>
 
 side* side_new(element type) {

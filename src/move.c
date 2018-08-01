@@ -1,6 +1,4 @@
 #include "move.h"
-#include <stdlib.h>
-#include <stdbool.h>
 #include <stdio.h>
 
 struct move {

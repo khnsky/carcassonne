@@ -1,12 +1,12 @@
 #ifndef AI_H
 #define AI_H
 
-#include "move.h"
-#include "tile.h"
-#include "point.h"
 #include "board.h"
-#include "tlist.h"
 #include "calculator.h"
+#include "move.h"
+#include "point.h"
+#include "tile.h"
+#include "tlist.h"
 
 /**
 * Finds the best move by Brute Force Search Algorithm 

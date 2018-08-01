@@ -1,10 +1,10 @@
 #include "logic.h"
 
+#include "ai.h"
 #include "board.h"
 #include "interactive.h"
 #include "tile.h"
 #include "tlist.h"
-#include "ai.h"
 
 #include <stdio.h>
 #include <stdlib.h>
