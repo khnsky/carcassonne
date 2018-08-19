@@ -5,7 +5,7 @@
 #include <time.h>
 #include <string.h>
 
-void tileGenerator(const char* default_tiles,const char* new_tiles, int num);
+void tileGenerator(const char* default_tiles, const char* new_tiles, size_t num);
 
 int main(int argc, char* argv[]) {
     if(argc != 4) {

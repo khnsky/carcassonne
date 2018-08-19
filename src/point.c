@@ -71,7 +71,7 @@ void List_free(List** selfPtr) {
     assert(selfPtr && *selfPtr && "null pointer on free");
     ListNode* cur = (*selfPtr)->items;
     ListNode* temp = NULL;
-    while (cur != NULL) {
+    while (cur) {
         temp = ListNode_getNext(cur);
         ListNode_free(&cur);
         cur = temp;

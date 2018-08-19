@@ -186,13 +186,13 @@ typedef enum {
 MAKE_STATE_FUNC(greeting)
 MAKE_STATE_FUNC(usage)
 MAKE_STATE_FUNC(help)
+MAKE_STATE_FUNC(change_prompt)
 MAKE_STATE_FUNC_LIST(tlist_print)
 MAKE_STATE_FUNC_LIST(init_tlist_interactive)
 MAKE_STATE_FUNC_LIST(write_tlist_interactive)
 MAKE_STATE_FUNC_BOARD(board_print)
 MAKE_STATE_FUNC_BOARD(load_board_interactive)
 MAKE_STATE_FUNC_BOARD(write_board_interactive)
-MAKE_STATE_FUNC(change_prompt)
 
 state_cmd choose_tile_interactive_state(state* s) {
     assert(s);

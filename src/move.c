@@ -1,4 +1,5 @@
 #include "move.h"
+
 #include <stdio.h>
 
 struct move {
