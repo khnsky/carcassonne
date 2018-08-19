@@ -93,7 +93,7 @@ void board_free(sized_board* board) {
         free(board->tiles[i]);
     }
     free(board->tiles);
-    board->tiles = 0;
+    board->tiles = NULL;
 }
 
 bool board_is_empty(const sized_board* board) {

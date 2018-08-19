@@ -54,10 +54,10 @@ void tlist_free(sized_tlist* list) {
     for (size_t i = 0; i < list->size; ++i) {
         tile_free(list->tiles[i]);
         free(list->tiles[i]);
-        list->tiles[i] = 0;
+        list->tiles[i] = NULL;
     }
     free(list->tiles);
-    list->tiles = 0;
+    list->tiles = NULL;
 }
 
 

@@ -27,7 +27,7 @@ void usage() {
 
 void init_tlist_interactive(sized_tlist* list) {
     free(list->tiles);
-    list->tiles = 0;
+    list->tiles = NULL;
     char name[64] = { 0 };
     while (true) {
         fputs("enter name of a file containing tile list: ", stdout);
@@ -48,7 +48,7 @@ void write_tlist_interactive(sized_tlist* list) {
 
 void load_board_interactive(sized_board* board) {
     board_free(board);
-    board->tiles = 0;
+    board->tiles = NULL;
     char name[64] = { 0 };
     while (true) {
         fputs("enter name of a file containing board: ", stdout);
@@ -83,7 +83,7 @@ tile* choose_tile_interactive(sized_tlist* list, tile** t) {
     for (size_t i = 0, count = 0; i < list->size; ++i) {
         if (list->tiles[i] && ++count == choice) {
             *t = list->tiles[i];
-            list->tiles[i] = 0;
+            list->tiles[i] = NULL;
         }
     }
     // if current tile is not null put it back on the list
@@ -91,7 +91,7 @@ tile* choose_tile_interactive(sized_tlist* list, tile** t) {
         // find empty space
         for (size_t i = 0; i < list->size; ++i) {
             // TODO: if it wont find empty space it will leak memory
-            if (list->tiles[i] == 0) {
+            if (list->tiles[i] == NULL) {
                 list->tiles[i] = temp;
                 break;
             }
