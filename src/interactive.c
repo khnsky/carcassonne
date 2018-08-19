@@ -10,14 +10,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-void greeting() {
+void greeting(void) {
     puts("hello player!\n"
          "welcome to a simple carcassonne based game!\n"
          "for usage run: carcassonne help\n"
          "for help type '?'\n");
 }
 
-void usage() {
+void usage(void) {
     puts("usage: carcassonne [tiles-list-file] [board-file]\n"
          "tiles-list-file and board-file should be flies in current directory\n"
          "if both tiles-list-file and board-file specified run in auto mode\n"
@@ -149,7 +149,7 @@ void place_tile_interactive(sized_board* board, sized_tlist* list, tile** t) {
 
 char prompt[32] = "> ";
 
-void change_prompt() {
+void change_prompt(void) {
     fputs("new prompt: ", stdout);
     fgets(prompt, sizeof(prompt), stdin);
     prompt[strcspn(prompt, "\n")] = '\0';
@@ -302,11 +302,9 @@ void _all_unique_cmds() {
 # define ALL_UNIQUE_CMDS()
 #endif
 
-void help() {
+void help(void) {
     for (size_t i = 0; i < ARR_LEN(act_list); ++i) {
         // do not print commands marked as abbreviations
-        // prints if desc different than 'abbrev'
-        // (strcmp returns 0 if the same)
         if (!STR_EQ(act_list[i].desc, "abbrev")) {
             printf("%s: %s\n", act_list[i].cmd, act_list[i].desc);
         }

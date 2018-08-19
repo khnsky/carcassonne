@@ -11,17 +11,17 @@
 /**
  * print usage.
  */
-void usage();
+void usage(void);
 
 /**
  * print greeting.
  */
-void greeting();
+void greeting(void);
 
 /**
  * print interactive help
  */
-void help();
+void help(void);
 
 /**
  * interactive mode logic and game loop.

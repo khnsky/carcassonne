@@ -13,7 +13,7 @@
 void handle_args(int argc, char* argv[]) {
     if (argc < 1) { return; }
 
-    const struct { const char* arg; void (*func)(); } arg_list[] = {
+    const struct { const char* arg; void (*func)(void); } arg_list[] = {
         { "usage",      usage },
         { "--usage",    usage },
         { "help",       usage },
