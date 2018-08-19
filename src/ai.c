@@ -40,7 +40,7 @@ move* ai_bruteForce(sized_board* board, const sized_tlist* list) {
                 else { rotations = 2; }
             } else { rotations = 4; }
             
-            for(int k = 0; k < rotations; k++) {
+            for(size_t k = 0; k < rotations; k++) {
                 // check if tile is applicable at the point
                 if(tile_can_place(board, list->tiles[j], row, column)) {
                     // make move

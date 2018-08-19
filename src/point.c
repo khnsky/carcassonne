@@ -6,16 +6,14 @@
 #include <assert.h>
 
 struct point {
-    int x;
-    int y;
+    size_t x;
+    size_t y;
     direction side;
 };
 
-point* point_new(int i, int j, direction side) {
+point* point_new(size_t i, size_t j, direction dir) {
     point* self = malloc(sizeof(point));
-    self->x = i;
-    self->y = j;
-    self->side = side;
+    *self = (point) { i, j, dir };
     return self;
 }
 
@@ -24,9 +22,9 @@ void point_free(point** selfPtr) {
     *selfPtr = NULL;
 }
 
-int point_getRow(point* self) { return self->x; }
+size_t point_getRow(point* self) { return self->x; }
 
-int point_getColumn(point* self) { return self->y; }
+size_t point_getColumn(point* self) { return self->y; }
 
 direction point_getSide(point* self) { return self->side; }
 
@@ -160,20 +158,20 @@ int List_getSize(List* self) { return (int)self->size; }
 int List_count(List* self) {
     int count = 0;
     ListNode* cur = self->items;
-    while (cur != NULL) {
+    while (cur) {
         count++;
         cur = ListNode_getNext(cur);
     }
     return count;
 }
 
-bool List_hasPoint(List* self, int i, int j, direction side) {
+bool List_hasPoint(List* self, size_t i, size_t j, direction dir) {
     ListNode* cur = self->items;
-    while (cur != NULL) {
+    while (cur) {
         point* p = ListNode_getPoint(cur);
-        if (point_getRow(p) == i    &&
+        if (point_getRow(p)    == i &&
             point_getColumn(p) == j &&
-            point_getSide(p) == side) { return true; }
+            point_getSide(p)   == dir) { return true; }
         cur = ListNode_getNext(cur);
     }
     return false;

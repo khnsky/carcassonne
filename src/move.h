@@ -15,7 +15,7 @@ int move_getColumn(const move*);
 int move_getTileIndex(const move*);
 int move_getRotation(const move*);
 int move_getScore(const move*);
-void move_set(move*, int, int, int, int, int);
+void move_set(move*, size_t, size_t, size_t, size_t, int);
 void move_setPoint(move*, int, int);
 void move_setTile(move*, int, int);
 void move_setScore(move*, int);
