@@ -9,20 +9,20 @@
 #include <stdio.h>
 
 
-int score(sized_board* board);
+int score(sized_board*);
 
-int roadScoreForTwo(board_t board, int rows, int columns,int i, int j, direction* sides);
+int roadScoreForTwo(board_t, int, int, int, int, direction*);
 
-bool tile_roadCompleted(board_t board, int rows, int columns, int i, int j, direction dir, List* stack);
+bool tile_roadCompleted(board_t, int, int, int, int, direction, List*);
 
-bool roadCompleted(board_t board, int rows, int columns, int i, int j, direction dir);
+bool roadCompleted(board_t, int, int, int, int, direction);
 
-bool tile_castleCompleted(board_t board, int rows, int columns, int i, int j, direction dir, List* stack);
+bool tile_castleCompleted(board_t, int, int, int, int, direction, List*);
 
-bool castleCompleted(board_t board, int rows, int columns, int i, int j, direction dir);
+bool castleCompleted(board_t, size_t, size_t, size_t, size_t, direction);
 
-int tile_numOfNeighbours(board_t board, int rows, int columns, int i, int j);
+int tile_numOfNeighbours(board_t, int, int, int, int);
 
-void board_setStatuses(board_t board, List* list, int res);
+void board_setStatuses(board_t, List*, int);
 
 #endif

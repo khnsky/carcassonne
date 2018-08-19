@@ -11,58 +11,58 @@
 
 typedef struct point point;
 
-point* point_new(int i, int j, direction side);
+point* point_new(size_t, size_t, direction);
 
-void point_free(point** selfPtr);
+void point_free(point**);
 
-int point_getRow(point* self);
+size_t point_getRow(point*);
 
-int point_getColumn(point* self);
+size_t point_getColumn(point*);
 
-direction point_getSide(point* self);
+direction point_getSide(point*);
 
 
 typedef struct ListNode ListNode;
 
-ListNode* ListNode_new(point* p);
+ListNode* ListNode_new(point*);
 
-void ListNode_free(ListNode** selfPtr);
+void ListNode_free(ListNode**);
 
-void ListNode_setNext(ListNode* node, ListNode* newNode);
+void ListNode_setNext(ListNode*, ListNode*);
 
-ListNode* ListNode_getNext(const ListNode* node);
+ListNode* ListNode_getNext(const ListNode*);
 
-point* ListNode_getPoint(const ListNode* node);
+point* ListNode_getPoint(const ListNode*);
 
-void ListNode_setPoint(ListNode* node, point* p);
+void ListNode_setPoint(ListNode*, point*);
 
 
 typedef struct List List;
 
 List* List_new(void);
 
-void List_free(List** selfPtr);
+void List_free(List**);
 
-void List_addFirst(List* self, point* p);
+void List_addFirst(List*, point*);
 
-void List_insertAt(List* self, point* p, int position);
+void List_insertAt(List*, point*, int);
 
-void List_addLast(List* self, point* p);
+void List_addLast(List*, point*);
 
-void List_removeFirst(List* self);
+void List_removeFirst(List*);
 
-void List_removeAt(List* self, int position);
+void List_removeAt(List*, int);
 
-void List_removeLast(List* self);
+void List_removeLast(List*);
 
-ListNode* List_getNodeAt(List* self, int position);
+ListNode* List_getNodeAt(List*, int);
 
-point* List_getPoint(List* self, int position);
+point* List_getPoint(List*, int);
 
-int List_getSize(List* self);
+int List_getSize(List*);
 
-int List_count(List* self);
+int List_count(List*);
 
-bool List_hasPoint(List* self, int i, int j, direction side);
+bool List_hasPoint(List*, size_t, size_t, direction);
 
 #endif
