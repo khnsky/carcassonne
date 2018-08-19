@@ -5,7 +5,8 @@ project(carcassonne C)
 set(CMAKE_C_STANDARD 11)
 
 set(CMAKE_C_FLAGS "-Wall -Wextra -Wlogical-op -Wdouble-promotion -Wconversion \
-    -Wsign-conversion -Wshadow -Wformat=2 -g3 -Wjump-misses-init -pedantic")
+    -Wsign-conversion -Wshadow -Wformat=2 -g3 -Wjump-misses-init -pedantic \
+    -Wstrict-prototypes -Werror")
 
 include_directories(src)
 
