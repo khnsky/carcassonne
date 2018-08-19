@@ -255,8 +255,12 @@ bool board_write(const sized_board* board, const char* filename) {
 
 void board_copy_offsetted(const sized_board* src,
                           ptrdiff_t h, ptrdiff_t w, sized_board* dest) {
-    for (size_t i = MAX(-h, 0); i < src->size && i + h < dest->size; ++i) {
-        for (size_t j = MAX(-w, 0); j < src->size && j + w < dest->size; ++j) {
+    for (ptrdiff_t i = MAX(-h, 0);
+         (size_t)i < src->size && (size_t)(i + h) < dest->size;
+         ++i) {
+        for (ptrdiff_t j = MAX(-w, 0);
+             (size_t)j < src->size && (size_t)(j + w) < dest->size;
+             ++j) {
             dest->tiles[i + h][j + w] = tile_alloc_from_tile(src->tiles[i][j]);
         }
     }
@@ -276,7 +280,7 @@ void board_move(ptrdiff_t dh, ptrdiff_t dw, sized_board* board) {
 void board_resize(size_t size, sized_board* board) {
     sized_board temp = { board_alloc(size), size };
     if (size > board->size) {
-        size_t delt = (size - board->size) / 2; // integer division
+        ptrdiff_t delt = (ptrdiff_t)(size - board->size) / 2;
         board_copy_offsetted(board, delt, delt, &temp);
     } else { board_copy(board, &temp); }
     board_free(board);
