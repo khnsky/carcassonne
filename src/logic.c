@@ -68,7 +68,7 @@ void run(int argc, char* argv[]) {
     // if one set mode to INTERACTIVE,
     // else set to AUTO
     gamemode mode = argc - 1;
-    char* list_file = 0,
+    char* list_file  = 0,
         * board_file = 0;
 
     if (mode == INTERACTIVE || mode == AUTO) {

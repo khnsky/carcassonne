@@ -237,52 +237,54 @@ state_cmd quit_state(state* s) {
     return CMD_QUIT;
 }
 
-const struct { const char* cmd; const char* desc; state_cmd (*func)(state*); } act_list[] = {
-    { "greeting",     "greets player",                  greeting_state                  },
-    { "g",            "abbrev",                         greeting_state                  },
+typedef state_cmd (*state_func)(state*);
+const struct { const char* cmd; const char* desc; state_func func; } act_list[] = {
+    { "greeting",     "greets player",          greeting_state                  },
+    { "g",            "abbrev",                 greeting_state                  },
 
-    { "usage",        "prints usage",                   usage_state                     },
-    { "u",            "abbrev",                         usage_state                     },
+    { "usage",        "prints usage",           usage_state                     },
+    { "u",            "abbrev",                 usage_state                     },
 
-    { "help",         "prints this message",            help_state                      },
-    { "h",            "abbrev",                         help_state                      },
-    { "?",            "abbrev",                         help_state                      },
+    { "help",         "prints this message",    help_state                      },
+    { "h",            "abbrev",                 help_state                      },
+    { "?",            "abbrev",                 help_state                      },
 
-    { "print list",   "prints tile list",               tlist_print_state               },
-    { "p l",          "abbrev",                         tlist_print_state               },
-    { "print board",  "prints the board",               board_print_state               },
-    { "p b",          "abbrev",                         board_print_state               },
-    { "print tile",   "print current tile",             tile_print_state                },
-    { "p t",          "abbrev",                         tile_print_state                },
-    { "print moves",  "print moves aviable",            board_print_legal_moves_state   },
-    { "p m",          "abbrev",                         board_print_legal_moves_state   },
+    { "print list",   "prints tile list",       tlist_print_state               },
+    { "p l",          "abbrev",                 tlist_print_state               },
+    { "print board",  "prints the board",       board_print_state               },
+    { "p b",          "abbrev",                 board_print_state               },
+    { "print tile",   "print current tile",     tile_print_state                },
+    { "p t",          "abbrev",                 tile_print_state                },
+    { "print moves",  "print moves aviable",    board_print_legal_moves_state   },
+    { "p m",          "abbrev",                 board_print_legal_moves_state   },
 
-    { "load list",    "load tile list file",            init_tlist_interactive_state    },
-    { "l l",          "abbrev",                         init_tlist_interactive_state    },
-    { "load board",   "load board file",                load_board_interactive_state    },
-    { "l b",          "abbrev",                         load_board_interactive_state    },
+    { "load list",    "load tile list file",    init_tlist_interactive_state    },
+    { "l l",          "abbrev",                 init_tlist_interactive_state    },
+    { "load board",   "load board file",        load_board_interactive_state    },
+    { "l b",          "abbrev",                 load_board_interactive_state    },
 
-    { "write list",   "write list to file",             write_tlist_interactive_state   },
-    { "w l",          "abbrev",                         write_tlist_interactive_state   },
-    { "write board",  "write board to file",            write_board_interactive_state   },
-    { "w b",          "abbrev",                         write_board_interactive_state   },
+    { "write list",   "write list to file",     write_tlist_interactive_state   },
+    { "w l",          "abbrev",                 write_tlist_interactive_state   },
+    { "write board",  "write board to file",    write_board_interactive_state   },
+    { "w b",          "abbrev",                 write_board_interactive_state   },
 
-    { "choose tile",  "choose tile to place",           choose_tile_interactive_state   },
-    { "c t",          "abbrev",                         choose_tile_interactive_state   },
+    { "choose tile",  "choose tile to place",   choose_tile_interactive_state   },
+    { "c t",          "abbrev",                 choose_tile_interactive_state   },
 
-    { "rotate tile",  "rotate current tile",            rotate_tile_interactive_state   },
+    { "rotate tile",  "rotate current tile",    rotate_tile_interactive_state   },
 
-    { "place tile",   "place choosen tile",             place_tile_interactive_state    },
+    { "place tile",   "place choosen tile",     place_tile_interactive_state    },
 
-    { "prompt",       "change prompt text",             change_prompt_state             },
+    { "prompt",       "change prompt text",     change_prompt_state             },
 
-    { "score",        "give score for current board",   score_interactive_state         },
-    { "s",            "abbrev",                         score_interactive_state         },
+    { "score",        "score current board",    score_interactive_state         },
+    { "s",            "abbrev",                 score_interactive_state         },
 
-    { "quit",         "quits the game",                 quit_state                      },
-    { "q",            "abbrev",                         quit_state                      },
-    { "exit",         "abbrev",                         quit_state                      },
-    { "e",            "abbrev",                         quit_state                      },
+    { "quit",         "quits the game",         quit_state                      },
+    { "q",            "abbrev",                 quit_state                      },
+    { "exit",         "abbrev",                 quit_state                      },
+    { "e",            "abbrev",                 quit_state                      },
+    { "x",            "abbrev",                 quit_state                      },
 };
 
 // check for user command collisions

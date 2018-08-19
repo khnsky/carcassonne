@@ -67,15 +67,15 @@ void move_setScore(move* self, int score) { self->score = score; }
 bool move_isEmpty(const move* self) { return self->tileIndex == -1; }
 
 bool move_isEqual(const move* self, const move* m) {
-    return self->row == m->row
-        && self->column == m->column
+    return self->row       == m->row
+        && self->column    == m->column
         && self->tileIndex == m->tileIndex
-        && self->rotation == m->rotation;
+        && self->rotation  == m->rotation;
 }
 
 void move_print(const move* self) {
     printf("Tile with index %i, "
-           "rotated by %i dergees is placed at point (%i,%i), "
+           "rotated by %i dergees is placed at point (%i, %i), "
            "produces final score of %i\n",
            self->tileIndex, self->rotation * 90, self->row, self->column, self->score);
 }

@@ -285,8 +285,8 @@ void board_resize(size_t size, sized_board* board) {
 }
 
 bool board_tileHasNeighbour(const sized_board* board, size_t i, size_t j) {
-    return (i > 0 && !tile_isEmpty(board->tiles[i - 1][j]))
-        || (j > 0 && !tile_isEmpty(board->tiles[i][j - 1]))
+    return (i > 0               && !tile_isEmpty(board->tiles[i - 1][j]))
+        || (j > 0               && !tile_isEmpty(board->tiles[i][j - 1]))
         || (i < board->size - 1 && !tile_isEmpty(board->tiles[i + 1][j]))
         || (j < board->size - 1 && !tile_isEmpty(board->tiles[i][j + 1]));
 }
@@ -303,6 +303,7 @@ void board_trim(sized_board* board) {
         if (pce) { ++dw; }
     }
     board_move(-dh, -dw, board);
+
     size_t sizeh = 0, sizew = 0;
     bool fre = true, fce = true;
     for (size_t i = board->size; i > 0; --i) {

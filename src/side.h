@@ -6,9 +6,9 @@
 #include <stdbool.h>
 
 typedef enum {
-    COMPL_NOT_SET = 0,
+    COMPL_NOT_SET       =  0,
     COMPL_NOT_COMPLETED = -1,
-    COMPL_COMPLETED = 1,
+    COMPL_COMPLETED     =  1,
 } cmpl;
 
 typedef enum direction { NORTH, EAST, SOUTH, WEST } direction;

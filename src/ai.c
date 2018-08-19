@@ -20,17 +20,17 @@ void ai_makeMove(sized_board* board, sized_tlist* list, move* m) {
 
 move* ai_bruteForce(sized_board* board, const sized_tlist* list) {
     int best = INT_MIN,
-        value,
-        rotations;
+        value;
+    rotation_t rotations;
     move* bestMove = move_default();
 
     // get the List of Points for available moves
     List* moves = getAllPossibleMoves(board);
 
     for(int i = 0; i < List_getSize(moves); i++) {
-        point* p = List_getPoint(moves,i);
-        int row = point_getRow(p),
-            column = point_getColumn(p);
+        point* p = List_getPoint(moves, i);
+        size_t row = point_getRow(p),
+               column = point_getColumn(p);
         for(size_t j = 0; j < list->size; j++) {
             // identify to no. of rotations required
             if(tile_isSymmetric(list->tiles[j])) {
@@ -59,7 +59,7 @@ move* ai_bruteForce(sized_board* board, const sized_tlist* list) {
                 tile_rotate(list->tiles[j]);
             }
             // rotate to the initial state
-            tile_rotate_amount(ROTATION_MOVES-rotations,list->tiles[j]);
+            tile_rotate_amount(ROTATION_MOVES - rotations, list->tiles[j]);
         }
     }
     
@@ -83,8 +83,9 @@ List* getAllPossibleMoves(const sized_board* board) {
    }
    for(size_t i = 0; i < board->size; i++) {
        for(size_t j = 0; j < board->size; j++) {
-           if(tile_isEmpty(board->tiles[i][j]) && board_tileHasNeighbour(board, i, j)) {
-               List_addLast(list,point_new(i,j,0));
+           if(tile_isEmpty(board->tiles[i][j]) &&
+              board_tileHasNeighbour(board, i, j)) {
+               List_addLast(list, point_new(i, j, 0));
            }
        }
    }
