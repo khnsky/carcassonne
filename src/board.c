@@ -284,8 +284,7 @@ void board_resize(size_t size, sized_board* board) {
         board_copy_offsetted(board, delt, delt, &temp);
     } else { board_copy(board, &temp); }
     board_free(board);
-    board->tiles = temp.tiles;
-    board->size = temp.size;
+    *board = (sized_board) { .tiles = temp.tiles, .size = temp.size };
 }
 
 bool board_tileHasNeighbour(const sized_board* board, size_t i, size_t j) {

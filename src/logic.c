@@ -54,9 +54,9 @@ void run_auto(const char* list_filename, const char* board_filename) {
     printf("\nScore: %i\n", score(&board));
     
     // write updated objects to files
-    tlist_write(&list,list_filename);
+    tlist_write(&list, list_filename);
     board_trim(&board);
-    board_write(&board,board_filename);
+    board_write(&board, board_filename);
 
     tlist_free(&list);
     board_free(&board);

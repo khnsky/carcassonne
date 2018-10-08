@@ -64,10 +64,7 @@ move* ai_bruteForce(sized_board* board, const sized_tlist* list) {
     }
     
     // if failed to get any move 
-    if(best == INT_MIN) {
-        move_free(&bestMove);
-        bestMove = NULL;
-    }
+    if (best == INT_MIN) { move_free(&bestMove); }
     
     List_free(&moves);
     return bestMove;

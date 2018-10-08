@@ -105,7 +105,6 @@ int score(sized_board* board) {
     return score;
 }
 
-
 // TODO: ???
 bool castleCompleted(board_t board, size_t rows, size_t columns,
                      size_t i, size_t j, direction dir) {
@@ -149,7 +148,7 @@ bool castleCompleted(board_t board, size_t rows, size_t columns,
     // list will contain the mentions of all visited city sides in this turn
     List* list = List_new();
     // add current tile to a list of visited files
-    List_addLast(list,point_new(i,j,dir));
+    List_addLast(list,point_new(i, j, dir));
     // checking if a tile is a part of completed castle
     bool isCompl = tile_castleCompleted(board, rows, columns, in, jn, dir, list);
     // obtaining the index of completion depending on the status of completion
@@ -313,7 +312,6 @@ bool tile_roadCompleted(board_t board, int rows, int columns,
     return tile_roadCompleted(board, rows, columns, in, jn, dir, stack);
 }
 
-
 int roadScoreForTwo(board_t board, int rows, int columns,
                     int i, int j, direction* sides) {
     tile* t = board[i][j];
@@ -331,7 +329,7 @@ int roadScoreForTwo(board_t board, int rows, int columns,
     bool isCompl = true;
 
     for(size_t k = 0; k < 2; k++) {
-        List_addLast(path,point_new(i,j,sides[k]));
+        List_addLast(path,point_new(i, j, sides[k]));
         int in = i, jn = j;
     
         if (sides[k] == NORTH) {
@@ -346,8 +344,7 @@ int roadScoreForTwo(board_t board, int rows, int columns,
                 continue;
             }
             jn = j + 1;
-        }
-        else if (sides[k] == SOUTH) {
+        } else if (sides[k] == SOUTH) {
             if (i >= rows - 1) {
                 isCompl = false;
                 continue;
@@ -446,8 +443,6 @@ bool roadCompleted(board_t board, int rows, int columns, int i, int j, direction
     return isCompl;
 }
 
-
-// to calculator
 int tile_numOfNeighbours(board_t board, int rows, int columns, int i, int j) {
     int count = 0;
     // checking left column
