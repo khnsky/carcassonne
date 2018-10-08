@@ -35,8 +35,7 @@ struct ListNode {
 
 ListNode* ListNode_new(point* p) {
     ListNode* self = malloc(sizeof(struct ListNode));
-    self->next = NULL;
-    self->p = p;
+    *self = (ListNode) { .p = p, .next = NULL };
     return self;
 }
 
@@ -61,8 +60,7 @@ struct List {
 
 List* List_new() {
     List* self = malloc(sizeof(struct List));
-    self->size = 0;
-    self->items = NULL;
+    *self = (List) { .size = 0, .items = NULL };
     return self;
 }
 
@@ -83,8 +81,7 @@ void List_free(List** selfPtr) {
 void List_addFirst(List* self, point* p) {
     ListNode* node = ListNode_new(p);
     ListNode_setNext(node, self->items);
-    self->items = node;
-    self->size = List_count(self);
+    *self = (List) { .size = List_count(self), .items = node };
 }
 void List_insertAt(List* self, point* p, int position) {
     assert(p && "null reference");
@@ -115,9 +112,8 @@ void List_addLast(List* self, point* p) {
 void List_removeFirst(List* self) {
     ListNode* node = self->items;
     assert(node && "null reference");
-    self->items = ListNode_getNext(node);
+    *self = (List) { .size = List_count(self), .items = ListNode_getNext(node) };
     ListNode_free(&node);
-    self->size = List_count(self);
 }
 
 void List_removeAt(List* self, int position) {

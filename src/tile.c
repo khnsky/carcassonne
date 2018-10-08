@@ -52,13 +52,14 @@ tile* tile_alloc_from_str_asgn(const char str[static 5], tile** ptr) {
 
 tile* tile_alloc_from_tile(const tile* orig) {
     if (orig) {
-        tile* new;
-        tile_alloc_asgn(&new);
-        new->up = side_copy(orig->up);
-        new->right = side_copy(orig->right);
-        new->down = side_copy(orig->down);
-        new->left = side_copy(orig->left);
-        new->mod = orig->mod;
+        tile* new = tile_alloc();
+        *new = (tile) {
+            .up    = side_copy(orig->up),
+            .right = side_copy(orig->right),
+            .down  = side_copy(orig->down),
+            .left  = side_copy(orig->left),
+            .mod   = orig->mod,
+        };
         return new;
     }
     return NULL;
@@ -109,15 +110,16 @@ char mod_to_char(modifier m) {
 
 char* tile_to_str(const tile* t, char buff[static 5]) {
     if (t && buff) {    // check if pointers are not null
-        buff[0] = elem_to_char(tile_getSideElement(t, NORTH));
-        buff[1] = elem_to_char(tile_getSideElement(t, EAST));
-        buff[2] = elem_to_char(tile_getSideElement(t, SOUTH));
-        buff[3] = elem_to_char(tile_getSideElement(t, WEST));
-        buff[4] = mod_to_char(t->mod);
+        buff = (char[5]) {
+            elem_to_char(tile_getSideElement(t, NORTH)),
+            elem_to_char(tile_getSideElement(t, EAST)),
+            elem_to_char(tile_getSideElement(t, SOUTH)),
+            elem_to_char(tile_getSideElement(t, WEST)),
+            mod_to_char(t->mod),
+        };
     }
     else if (buff) {    // null tile pointer should mean empty board cell
-        buff[0] = '\t';
-        memset(&buff[1], '\0', 4);
+        buff = (char[5]) { '\t', '\0', '\0', '\0', '\0' };
     }
     return buff;
 }
@@ -133,14 +135,14 @@ void tile_print(const tile* t) {
 
 tile* tile_rotate(tile* t) {
     if (t) {
-        side* u = t->up;
-        side* r = t->right;
-        side* d = t->down;
-        side* l = t->left;
-        t->up = l;
-        t->right = u;
-        t->down = r;
-        t->left = d;
+        tile temp = {
+            .up    = t->left,
+            .right = t->up,
+            .down  = t->right,
+            .left  = t->down,
+            .mod   = t->mod,
+        };
+        *t = temp;
     }
     return t;
 }
