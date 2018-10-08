@@ -1,6 +1,5 @@
 #include "tile.h"
 
-#include <assert.h>
 #include <ctype.h>
 #include <stdlib.h>
 #include <string.h>
@@ -178,6 +177,7 @@ element tile_getSideElement(const tile* t, direction dir) {
     case WEST:  return side_getType(t->left);
     }
     assert(dir <= NORTH && dir >= WEST && "invalid rotation");
+    UNREACHABLE();
 }
 
 side* tile_getSide(const tile* t, direction dir) {

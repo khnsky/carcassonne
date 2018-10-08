@@ -5,6 +5,10 @@
 
 #include <stdbool.h>
 
+#include <assert.h>
+
+#define UNREACHABLE() assert(0 && "unreachable")
+
 typedef enum {
     COMPL_NOT_SET       =  0,
     COMPL_NOT_COMPLETED = -1,

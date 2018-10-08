@@ -1,6 +1,5 @@
 #include "side.h"
 
-#include <assert.h>
 #include <stdlib.h>
 
 side* side_new(element type) {
@@ -45,6 +44,7 @@ direction direction_getOpposite(direction dir) {
     case WEST: return EAST;
     }
     assert(dir >= NORTH && dir <= WEST && "invalid direction");
+    UNREACHABLE();
 }
 
 bool direction_areOpposite(direction dir1, direction dir2) {
