@@ -158,7 +158,7 @@ void change_prompt(void) {
 typedef struct {
     sized_tlist* list;
     sized_board* board;
-    tile* c_tile;
+    tile* current_tile;
 } state;
 
 typedef enum {
@@ -196,32 +196,32 @@ MAKE_STATE_FUNC_BOARD(write_board_interactive)
 
 state_cmd choose_tile_interactive_state(state* s) {
     assert(s);
-    choose_tile_interactive(s->list, &s->c_tile);
+    choose_tile_interactive(s->list, &s->current_tile);
     return CMD_KNOWN;
 }
 
 state_cmd tile_print_state(state* s) {
     assert(s);
-    tile_print(s->c_tile);
+    tile_print(s->current_tile);
     putchar('\n');
     return CMD_KNOWN;
 }
 
 state_cmd rotate_tile_interactive_state(state* s) {
     assert(s);
-    rotate_tile_interactive(&s->c_tile);
+    rotate_tile_interactive(&s->current_tile);
     return CMD_KNOWN;
 }
 
 state_cmd board_print_legal_moves_state(state* s) {
     assert(s);
-    board_print_legal_moves(s->board, s->c_tile);
+    board_print_legal_moves(s->board, s->current_tile);
     return CMD_KNOWN;
 }
 
 state_cmd place_tile_interactive_state(state* s) {
     assert(s);
-    place_tile_interactive(s->board, s->list, &s->c_tile);
+    place_tile_interactive(s->board, s->list, &s->current_tile);
     return CMD_KNOWN;
 }
 
@@ -325,14 +325,14 @@ void run_interactive(gamemode mode, const char* list_filename) {
     sized_board board;
     if (!board_init(mode, 0, &board)) { load_board_interactive(&board); }
 
-    tile* c_tile = 0;
+    tile* current_tile = 0;
 
-    state s = { &list, &board, c_tile };
+    state s = { &list, &board, current_tile };
 
     while (run_prompt(&s) != CMD_QUIT) { ; }
 
     tlist_free(&list);
     board_free(&board);
-    tile_free(c_tile);
-    free(c_tile);
+    tile_free(current_tile);
+    free(current_tile);
 }
