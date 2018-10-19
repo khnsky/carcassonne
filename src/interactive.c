@@ -31,8 +31,9 @@ void init_tlist_interactive(sized_tlist* list) {
     char name[64] = { 0 };
     while (true) {
         fputs("enter name of a file containing tile list: ", stdout);
-        fgets(name, sizeof(name), stdin);
-        name[strcspn(name, "\n")] = '\0';
+        //fgets(name, sizeof(name), stdin);
+        //name[strcspn(name, "\n")] = '\0';
+        strcpy(name, "tiles");
         if (tlist_init(name, list)) { return; }
         fputs("initializing failed, try again.\n", stderr);
     }

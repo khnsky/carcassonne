@@ -11,17 +11,17 @@
 
 int score(sized_board*);
 
-int roadScoreForTwo(board_t, int, int, int, int, direction*);
+int roadScoreForTwo(board_t, size_t, size_t, size_t, size_t, direction*);
 
-bool tile_roadCompleted(board_t, int, int, int, int, direction, List*);
+bool tile_roadCompleted(board_t, size_t, size_t, size_t, size_t, direction, List*);
 
-bool roadCompleted(board_t, int, int, int, int, direction);
+bool roadCompleted(board_t, size_t, size_t, size_t, size_t, direction);
 
-bool tile_castleCompleted(board_t, int, int, int, int, direction, List*);
+bool tile_castleCompleted(board_t, size_t, size_t, size_t, size_t, direction, List*);
 
 bool castleCompleted(board_t, size_t, size_t, size_t, size_t, direction);
 
-int tile_numOfNeighbours(board_t, int, int, int, int);
+int tile_numOfNeighbours(board_t, size_t, size_t, size_t, size_t);
 
 void board_setStatuses(board_t, List*, int);
 
