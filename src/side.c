@@ -29,16 +29,16 @@ element side_getType(const side* self) { return self->type; }
 
 void side_setType(side* self, element type) { self->type = type; }
 
-int side_isCompleted(const side* self) { return self->completion; }
+cmpl side_isCompleted(const side* self) { return self->completion; }
 
 void side_setCompletionStatus(side* self, int compl) { self->completion = compl; }
 
 direction direction_getOpposite(direction dir) {
     switch (dir) {
     case NORTH: return SOUTH;
-    case EAST: return WEST;
+    case EAST:  return WEST;
     case SOUTH: return NORTH;
-    case WEST: return EAST;
+    case WEST:  return EAST;
     }
     assert(dir >= NORTH && dir <= WEST && "invalid direction");
     UNREACHABLE();

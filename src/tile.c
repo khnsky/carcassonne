@@ -194,7 +194,7 @@ void tile_setSideCompletion(const tile* t, direction dir, int status) {
     side_setCompletionStatus(tile_getSide(t, dir), status);
 }
 
-int tile_getSideCompletion(const tile* t, direction dir) {
+cmpl tile_getSideCompletion(const tile* t, direction dir) {
     switch (dir) {
     case NORTH: return side_isCompleted(t->up);
     case EAST:  return side_isCompleted(t->right);
