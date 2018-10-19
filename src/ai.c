@@ -22,7 +22,7 @@ move* ai_bruteForce(sized_board* board, const sized_tlist* list) {
     int best = INT_MIN,
         value;
     rotation_t rotations;
-    move* bestMove = move_default();
+    move* bestMove = move_alloc();
 
     // get the List of Points for available moves
     List* moves = getAllPossibleMoves(board);

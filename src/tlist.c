@@ -90,6 +90,6 @@ tile* tlist_eraseAt(sized_tlist* list, size_t index) {
     for(size_t i = index; i < list->size - 1; ++i) {
         list->tiles[i] = list->tiles[i + 1];
     }
-    list->size--;
+    list->size -= 1;
     return t;
 }

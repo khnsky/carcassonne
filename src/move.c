@@ -3,64 +3,55 @@
 #include <stdio.h>
 
 struct move {
-    int row;
-    int column;
-    int tileIndex;
-    int rotation;
+    size_t row;
+    size_t column;
+    size_t tileIndex;
+    rotation_t rotation;
     int score;
 };
 
-move* move_new(int row, int col, int index, int rotation) {
-    move* self = malloc(sizeof(move)); 
-    self->row = row;
-    self->column = col;
-    self->tileIndex = index;
-    self->rotation = rotation;
+move* move_new(size_t row, size_t col, size_t index, rotation_t rotation) {
+    move* self = malloc(sizeof(move));
+    // TODO: score not set?
+    *self = (move) {
+        .row       = row,
+        .column    = col,
+        .tileIndex = index,
+        .rotation  = rotation
+    };
     return self;
 }
 
-move* move_default() {
-    move* self = malloc(sizeof(move)); 
-    self->row = self->column = self->tileIndex = self->rotation = -1;
-    return self;
-}
-
-move* move_newFromScore(int score) {
-    move* self =move_default();
-    self->score = score;
-    return self;
-}
+move* move_alloc() { return malloc(sizeof(move)); }
 
 void move_free(move** selfPtr) {
     free(*selfPtr);
     *selfPtr = NULL;
 }
 
-int move_getRow(const move* self) { return self->row; }
+size_t move_getRow(const move* self) { return self->row; }
 
-int move_getColumn(const move* self) { return self->column; }
+size_t move_getColumn(const move* self) { return self->column; }
 
-int move_getTileIndex(const move* self) { return self->tileIndex; }
+size_t move_getTileIndex(const move* self) { return self->tileIndex; }
 
-int move_getRotation(const move* self) { return self->rotation; }
+rotation_t move_getRotation(const move* self) { return self->rotation; }
 
 int move_getScore(const move* self) { return self->score; }
 
-void move_set(move* self, int row, int col, int index, int rotation, int score) {
-    self->row = row;
-    self->column = col;
-    self->tileIndex = index;
-    self->rotation = rotation;
-    self->score = score;
+void move_set(move* self, size_t row, size_t col,
+              size_t index, rotation_t rotation, int score) {
+    *self = (move) { row, col, index, rotation, score };
 }
 
-void move_setPoint(move* self, int row, int col) {
-    self->row = row;
+void move_setPoint(move* self, size_t row, size_t col) {
+    self->row    = row;
     self->column = col;
 }
-void move_setTile(move* self, int index, int rotation) {
+
+void move_setTile(move* self, size_t index, rotation_t rotation) {
     self->tileIndex = index;
-    self->rotation = rotation;
+    self->rotation  = rotation;
 }
 
 void move_setScore(move* self, int score) { self->score = score; }
