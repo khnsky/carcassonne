@@ -14,20 +14,20 @@ int main(int argc, char* argv[]) {
         return EXIT_FAILURE;
     }
 
-    tileGenerator(argv[1], argv[2], atoi(argv[3]));
+    tileGenerator(argv[1], argv[2], (size_t)atoll(argv[3]));
     return EXIT_SUCCESS;
 }
 
-void tileGenerator(const char* default_tiles,const char* new_tiles, int num) {
+void tileGenerator(const char* default_tiles, const char* new_tiles, size_t num) {
     sized_tlist default_list = tlist_init_exit_on_err(default_tiles);
     
     sized_tlist new_list;
     new_list.size = num;
     new_list.tiles = malloc(num * sizeof(tile*));
 
-    srand(time(NULL));
-    for(int i = 0; i < num; i++) {
-        new_list.tiles[i] = default_list.tiles[rand() % default_list.size];
+    srand((unsigned)time(NULL));
+    for(size_t i = 0; i < num; i++) {
+        new_list.tiles[i] = default_list.tiles[(size_t)rand() % default_list.size];
     }
 
     tlist_write(&new_list,new_tiles);
