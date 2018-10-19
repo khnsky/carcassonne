@@ -131,14 +131,6 @@ void place_tile_interactive(sized_board* board, sized_tlist* list, tile** t) {
                 *t = 0;
                 return;
             }
-            //rotation_t rot;
-            //if ((rot = can_place_tile_rotated(board, *t, h, w))) {
-            //    fputs("tile can't be placed right now "
-            //          "but could be placed if it was rotated by ", stdout);
-            //    rotation_print(rot);
-            //    putchar('\n');
-            //    return;
-            //}
             fputs("can't place tile here\n", stderr);
         } else {
             for (int ch; (ch = getchar()) != EOF && ch != '\n' && ch != '\r';) { ; }
