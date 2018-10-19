@@ -4,22 +4,19 @@
 
 side* side_new(element type) {
     side* self = malloc(sizeof(side));
-    self->type = type;
-    self->completion = 0;
+    *self = (side) { .type = type, .completion = 0 };
     return self;
 }
 
 side* side_newDefault() {
     side* self = malloc(sizeof(side));
-    self->type = -1;
-    self->completion = 0;
+    *self = (side) { .type = -1, .completion = 0 };
     return self;
 }
 
 side* side_copy(const side* self) {
-    side* copy = side_newDefault();
-    copy->type = self->type;
-    copy->completion = self->completion;
+    side* copy = malloc(sizeof(side));
+    *copy = (side) { .type = self->type, .completion = self->completion };
     return copy;
 }
 
