@@ -6,8 +6,7 @@
 
 bool tlist_parse(const char* filename, sized_tlist* list) {
     if (!list || !list->tiles) { return false; }
-    FILE* file = fopen(filename, "r");
-    if (file == NULL) { return false; }
+    TRY(FILE* file, (file = fopen(filename, "r")), return 0);
     for (size_t i = 0; i < list->size; ++i) {
         // if any tile parsing fails return false
         if (!tile_parse(file, &list->tiles[i])) {
@@ -76,7 +75,7 @@ void tlist_print(const sized_tlist* list) {
 }
 
 bool tlist_write(const sized_tlist* list, const char* filename) {
-    TRY_OPEN(file, filename, "w");
+    TRY(FILE* file, (file = fopen(filename, "w")), return 0);
     char str[5];
     for (size_t i = 0; i < list->size; ++i) {
         fprintf(file, "%.*s\n", 5, tile_to_str(list->tiles[i], str));

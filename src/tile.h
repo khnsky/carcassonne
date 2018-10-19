@@ -8,9 +8,9 @@
 #include <stddef.h>
 #include <stdio.h>
 
-#define TRY_OPEN(file, name, mode)  \
-    FILE* file = fopen(name, mode); \
-    if (!file) { return 0; }
+#define TRY(init, expr, or)                 \
+    init;                                   \
+    do { if (expr) {} else or; } while (0)
 
 /** @addtogroup Tile
 * enumerators and struct used to represent a tile
